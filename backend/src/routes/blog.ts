@@ -74,6 +74,32 @@ blogRouter.put('/', async (c)=>{
     })
 })
 
+blogRouter.get('/:id', async (c)=>{
+    const prisma= new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL
+    }).$extends(withAccelerate())
+
+    const param= c.req.param('id')
+
+    try{
+        const blog= await prisma.post.findUnique({
+            where: {
+                id: param
+            }
+        })
+
+        return c.json({
+            blog
+        })
+    } catch(e){
+        return c.json({
+            message: "Blog not found"
+        })
+    }
+        
+
+})
+
 blogRouter.get('/', async (c)=>{
     const prisma= new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL
