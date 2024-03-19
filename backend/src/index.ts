@@ -1,12 +1,14 @@
 import userRouter from './routes/user'
 import blogRouter from './routes/blog'
 import { Hono } from 'hono'
-import { verify } from 'hono/jwt'
-
+import { PrismaClient } from '@prisma/client/edge'
 const app = new Hono<{
   Bindings: {
     DATABASE_URL: string,
     JWT_SECRET: string
+  }, 
+  Variables: {
+    prisma: PrismaClient
   }
 }>()
 
