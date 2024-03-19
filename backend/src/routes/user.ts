@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client/edge"
 import { withAccelerate } from "@prisma/extension-accelerate"
 import { Hono } from "hono"
 import { sign } from "hono/jwt"
+import { signupSchema, signinSchema } from "@devratdave/common"
 
 const userRouter= new Hono<{
     Bindings: {
@@ -16,6 +17,12 @@ userRouter.post('/signup', async (c) => {
     }).$extends(withAccelerate())
   
     const body= await c.req.json()
+    if (!signupSchema.safeParse(body).success){
+      c.status(411)
+      return c.json({
+        message: "Invalid Inputs"
+      })
+    }
     try{
       const user= await prisma.user.create({
         data: {
@@ -27,6 +34,7 @@ userRouter.post('/signup', async (c) => {
       const token= await sign({ id: user.id }, c.env.JWT_SECRET)
       return c.json({ token }) 
     } catch(e){
+      c.status(403)
       return c.json({
         error: e
       })
@@ -41,6 +49,12 @@ userRouter.post('/signin', async (c) => {
 
   const body= await c.req.json()
 
+  if(!signinSchema.safeParse(body)){
+    c.status(411)
+    return c.json({
+      message: "Invalid Inputs"
+    })
+  }
   const user= await prisma.user.findFirst({
       where: {
       email: body.email,
@@ -53,6 +67,7 @@ userRouter.post('/signin', async (c) => {
       const token= await sign({ id: user.id }, c.env.JWT_SECRET )
       return c.json({ token })   
   } catch(e){
+      c.status(401)
       return c.json({
       message: "No user found with these credentials found"
       })

@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client/edge"
 import { withAccelerate } from "@prisma/extension-accelerate"
 import { Hono } from "hono"
 import { verify } from "hono/jwt"
+import { blogCreateSchema, blogUpdateSchema } from "@devratdave/common"
 
 const blogRouter= new Hono<{
     Bindings: {
@@ -15,6 +16,7 @@ const blogRouter= new Hono<{
 blogRouter.use(async (c, next)=>{
     const authToken= c.req.header('authorization')
     if (!authToken){
+        c.status(401)
       return c.json({
         message: "You are not authenticated to be on this page"
       })
@@ -39,6 +41,12 @@ blogRouter.post('/', async (c)=>{
     }).$extends(withAccelerate())
 
     const body= await c.req.json()
+    if(!blogCreateSchema.safeParse(body)){
+        c.status(400)
+        return c.json({
+            message: "Invalid Inputs"
+        })
+    }
     const blog= await prisma.post.create({
         data: {
             title: body.title,
@@ -57,16 +65,18 @@ blogRouter.put('/', async (c)=>{
     }).$extends(withAccelerate())
 
     const body= await c.req.json()
-
-    const updatedPost= await prisma.post.update({
+    if(!blogUpdateSchema.safeParse(body).success){
+        c.status(400)
+        return c.json({
+            message: "Invalid Inputs"
+        })
+    }
+    await prisma.post.update({
         where: {
             id: body.id,
             authorId: body.authorId
         }, 
-        data: {
-            title: body.title,
-            content: body.content
-        }
+        data: body
     })
 
     return c.json({
