@@ -41,7 +41,7 @@ blogRouter.post('/', async (c)=>{
     }).$extends(withAccelerate())
 
     const body= await c.req.json()
-    if(!blogCreateSchema.safeParse(body)){
+    if(!blogCreateSchema.safeParse(body).success){
         c.status(400)
         return c.json({
             message: "Invalid Inputs"
@@ -73,10 +73,13 @@ blogRouter.put('/', async (c)=>{
     }
     await prisma.post.update({
         where: {
-            id: body.id,
-            authorId: body.authorId
+            id: body.blog_id,
+            authorId: c.get("userId")
         }, 
-        data: body
+        data: {
+            title: body.title,
+            content: body.content
+        }
     })
 
     return c.json({

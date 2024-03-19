@@ -1,6 +1,6 @@
 {
   "name": "@devratdave/common",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@devratdave/common": "^1.0.3",
     "zod": "^3.22.4"
   }
 }
