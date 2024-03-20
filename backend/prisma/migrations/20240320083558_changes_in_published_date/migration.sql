@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Post" ALTER COLUMN "publishDate" SET DATA TYPE TIMESTAMP(3);
