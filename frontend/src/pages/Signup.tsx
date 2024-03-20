@@ -14,15 +14,21 @@ export const Signup=()=> {
         password: ""
     })
 
-    async function sendRequest(){
+    function sendRequest(){
         if (!signupSchema.safeParse(signupInfo).success){
             return alert("Invalid inputs, please check the values you have entered")
         }
-        const res= await axios.post("https://backend.devratdave02.workers.dev/api/v1/user/signup", signupInfo)
+        axios.post("https://backend.devratdave02.workers.dev/api/v1/user/signup", signupInfo)
+        .then((res)=>{
+            localStorage.setItem('token', res.data.token)
+            localStorage.setItem("name", res.data.name)
+            navigate('/home')
+            return alert('Welcome, we hope you have a good time')
+        }).catch((e)=>{
+            alert(e.response.data.message)
+            return navigate('/signin')
+        })
         
-        localStorage.setItem('token', res.data.token)
-        navigate('/home')
-        return alert('Welcome, we hope you have a good time')
     }
     return(
         <div className="grid grid-cols-1 lg:grid-cols-2 h-screen bg-slate-200">

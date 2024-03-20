@@ -13,15 +13,21 @@ export const Signin= ()=> {
         password: ""
     })
 
-    async function sendRequest(){
+    function sendRequest(){
         if (!signinSchema.safeParse(signinInfo).success){
             return alert("Invalid inputs, please check the values you have entered")
         }
-        const res= await axios.post('https://backend.devratdave02.workers.dev/api/v1/user/signin', signinInfo)
-        const token= res.data.token
-        localStorage.setItem("token", token)
-        navigate('/home')
-        return alert(`Welcome back, user`)
+        axios.post('https://backend.devratdave02.workers.dev/api/v1/user/signin', signinInfo)
+        .then((res)=>{
+            localStorage.setItem("token", res.data.token)
+            localStorage.setItem("name", res.data.name)
+            navigate('/home')
+            return alert(`Welcome back, user`)
+        })
+        .catch((e)=>{
+            alert(e.response.data.message)
+            return navigate('/signin')
+        })
     }
 
     return(

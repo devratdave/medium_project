@@ -1,5 +1,5 @@
 interface buttonProps {
-    onclick(): void
+    onclick: () => void
     label: string
 }
 
