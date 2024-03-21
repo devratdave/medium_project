@@ -26,7 +26,7 @@ export const Signin= ()=> {
         })
         .catch((e)=>{
             alert(e.response.data.message)
-            return navigate('/signin')
+            return navigate('/')
         })
     }
 
@@ -45,7 +45,7 @@ export const Signin= ()=> {
 
                         </form>
                         <div className="text-gray-500">
-                            Don't have an account? <a className="text-gray-500 hover:text-gray-700 underline" href={'/signup'}>Sign Up</a>
+                            Don't have an account? <a className="text-gray-500 hover:text-gray-700 underline cursor-pointer" onClick={()=>{navigate('/signup')}}>Sign Up</a>
                         </div>
                     </div>
                 </div>

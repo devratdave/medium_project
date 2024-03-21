@@ -9,7 +9,7 @@ interface fullBlogParams {
 export const FullBlog = ({title, content, author}: fullBlogParams) => {
     return(
         <div className="flex justify-center">
-            <div className="w-full md:max-w-3xl">
+            <div className="w-full md:max-w-4xl">
             <div className="grid grid-cols-12">
             <div className="col-span-8 m-4">
                 <div className="text-4xl font-semibold">

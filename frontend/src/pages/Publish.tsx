@@ -23,7 +23,7 @@ export const Publish = () => {
             <AppBar />
             <div>
                 <div className="flex justify-center">
-                <div className="w-full md:max-w-3xl">
+                <div className="w-full md:max-w-4xl">
                 <div className="mb-6">
                     <input type="text" id="large-input" className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500" placeholder="Article Title" onChange={(e)=>setArticleTitle(e.target.value)} />
                 </div>

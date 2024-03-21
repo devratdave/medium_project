@@ -13,7 +13,7 @@ export const Blog = () => {
             <div>
                 <AppBar />   
             <div className="flex justify-center">
-            <div className="w-full md:max-w-3xl">
+            <div className="w-full md:max-w-4xl">
                 <div className="grid grid-cols-12">
                 <div className="col-span-8 m-4">
                     <FullBlogSkeleton />

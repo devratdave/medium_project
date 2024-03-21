@@ -35,7 +35,7 @@ export const EditUserBlog = () => {
             <div>
                 <AppBar />   
             <div className="flex justify-center">
-            <div className="w-full md:max-w-3xl">
+            <div className="w-full md:max-w-4xl">
                 <div className="grid grid-cols-12">
                 <div className="col-span-8 m-4">
                     <FullBlogSkeleton />
@@ -75,7 +75,7 @@ export const EditUserBlog = () => {
             <div>
             <div>
                 <div className="flex justify-center">
-                <div className="w-full md:max-w-3xl">
+                <div className="w-full md:max-w-4xl">
                 <div className="mb-6">
                     <input type="text" value={newBlog.title} className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500" placeholder="Article Title" onChange={(e)=>setNewBlog({...newBlog, title:e.target.value})} />
                 </div>

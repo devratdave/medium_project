@@ -7,7 +7,7 @@ const DropDown: FC<{userName: string | undefined}> = ({userName}) =>
     const [isExpanded, setIsExpanded] = useState(false)
     const logout = () => {
       localStorage.clear()
-      navigate('/signin')
+      navigate('/')
       return alert('Thanks for stepping by, have a great day')
     }
 
@@ -15,7 +15,7 @@ const DropDown: FC<{userName: string | undefined}> = ({userName}) =>
       <div className="relative">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="h-8 w-8 flex items-center justify-center rounded-full px-2 py-1 hover:bg-gray-400 bg-gray-300"
+          className="h-8 w-8 flex items-center justify-center rounded-full px-2 py-1 hover:bg-gray-400 bg-gray-300 font-light"
         >
           <div className="">{userName}</div>
 
@@ -28,7 +28,7 @@ const DropDown: FC<{userName: string | undefined}> = ({userName}) =>
                     setIsExpanded(false);
                     navigate('/account')
                   }}
-                  className="hover:bg-blue-500 hover:text-white px-2 cursor-pointer border-b py-2 font-normal"
+                  className="hover:bg-blue-500 hover:text-white px-2 cursor-pointer border-b text-base py-2 font-normal"
                   key="account">
                   Account
                 </li>
@@ -37,7 +37,7 @@ const DropDown: FC<{userName: string | undefined}> = ({userName}) =>
                     setIsExpanded(false);
                     logout()
                   }}
-                  className="hover:bg-blue-500 hover:text-white px-2 cursor-pointer py-1 text-md font-normal"
+                  className="hover:bg-blue-500 hover:text-white px-2 cursor-pointer py-1 text-base font-normal"
                   key="logout">
                   Logout
                 </li>

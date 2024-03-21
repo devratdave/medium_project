@@ -61,7 +61,7 @@ export const useBlogs = () => {
         })
         .catch((e)=>{
             alert(e.response.data.message)
-            navigate('/signin')
+            navigate('/')
         })
     }, [])
 

@@ -12,7 +12,7 @@ export const Account = () => {
                 <AppBar />
                 
                 <div className="flex justify-center">
-                <div className="w-full md:max-w-3xl">
+                <div className="w-full md:max-w-4xl">
                     <Skeleton />
                     <Skeleton />
                     <Skeleton />
@@ -27,7 +27,7 @@ export const Account = () => {
         <div>
             <AppBar />
             <div className="flex justify-center">
-                <div className="w-full md:max-w-3xl">
+                <div className="w-full md:max-w-4xl">
                     <div className="text-2xl border-b mb-4 pb-2">
                         Your Blogs
                     </div>
