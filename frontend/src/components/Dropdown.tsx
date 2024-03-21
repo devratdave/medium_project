@@ -1,22 +1,6 @@
 import { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const UpTriangle = ({ size }: { size: number }) => {
-  const borderStyle = '1px solid rgb(209, 213, 219)';
-  return <div style={{
-    position: 'absolute',
-    top: '-4px',
-    left: '15px',
-    width: `${size}px`,
-    height: `${size}px`,
-    transform: 'rotate(45deg)',
-    backgroundColor: 'white',
-    borderLeft: borderStyle,
-    borderTop: borderStyle,
-  }}>
-  </div >
-}
-
 const DropDown: FC<{userName: string | undefined}> = ({userName}) => 
 {
   const navigate= useNavigate()

@@ -1,7 +1,6 @@
 import axios from "axios"
 import { AppBar } from "../components/AppBar"
 import { useNavigate, useParams } from "react-router-dom"
-import { useBlog } from "../hooks"
 import { useEffect, useState } from "react"
 import { FullBlogSkeleton } from "../components/FullBlogSkeleton"
 
