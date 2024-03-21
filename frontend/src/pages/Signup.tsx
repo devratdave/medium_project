@@ -23,7 +23,7 @@ export const Signup=()=> {
             localStorage.setItem('token', res.data.token)
             localStorage.setItem("name", res.data.name)
             navigate('/home')
-            return alert('Welcome, we hope you have a good time')
+            return alert(`Welcome ${res.data.name}, we hope you have a good time`)
         }).catch((e)=>{
             alert(e.response.data.message)
             return navigate('/signin')
@@ -40,7 +40,10 @@ export const Signup=()=> {
                             <FormComponent label="Name" type="text" placeholder="John Doe" onchange={(e)=>{setSignupInfo({...signupInfo, name:e.target.value})}} />
                             <FormComponent label="Email Address" type="email" placeholder="johndoe@gmail.com" onchange={(e)=>{setSignupInfo({...signupInfo, email:e.target.value})}}/>
                             <FormComponent label="Password" type="password" placeholder="password" onchange={(e)=>{setSignupInfo({...signupInfo, password:e.target.value})}}/>
-                            <Button onclick={sendRequest} label="Sign Up"/>
+                            <div className="mt-4">
+                                <Button onclick={sendRequest} label="Sign Up"/>
+                            </div>
+                            
                         </form>
                         <div className="text-gray-500">
                             Already have an account? <a className="text-gray-500 hover:text-gray-700 underline" href={'/signin'}>Login</a>

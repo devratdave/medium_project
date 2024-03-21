@@ -1,12 +1,12 @@
 import { AppBar } from "../components/AppBar"
-import { Blogs } from "../components/Blogs"
 import { Skeleton } from "../components/Skeleton"
-import { useBlogs } from "../hooks"
+import { UserBlog } from "../components/UserBlog"
+import { useUserBlogs } from "../hooks"
 
-export const Home= ()=> {
-    const {loading, blogs}= useBlogs()
+export const Account = () => {
+    const {loading, userBlogs}= useUserBlogs()
 
-    if(loading){
+    if (loading){
         return(
             <div>
                 <AppBar />
@@ -23,15 +23,22 @@ export const Home= ()=> {
             </div>
         )
     }
-
     return(
-        <div className="">
+        <div>
             <AppBar />
             <div className="flex justify-center">
                 <div className="w-full md:max-w-3xl">
-                    {blogs.map((blog)=>{
+                    <div className="text-2xl border-b mb-4 pb-2">
+                        Your Blogs
+                    </div>
+                    {userBlogs.length==0 ? 
+                        <div className="text-center">
+                            You have no blogs uploaded. Click on 'new' to get started with your journey.
+                        </div>
+                    : 
+                    userBlogs.map((blog)=>{
                         return(
-                                <Blogs key={blog.id} authorName={blog.author.name} title={blog.title} content={blog.content} id={blog.id}/>
+                                <UserBlog key={blog.id} title={blog.title} content={blog.content} id={blog.id}/>
                         )
                     })}
                 </div>   

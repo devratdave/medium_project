@@ -22,7 +22,7 @@ export const Signin= ()=> {
             localStorage.setItem("token", res.data.token)
             localStorage.setItem("name", res.data.name)
             navigate('/home')
-            return alert(`Welcome back, user`)
+            return alert(`Welcome back, ${res.data.name}`)
         })
         .catch((e)=>{
             alert(e.response.data.message)
@@ -39,7 +39,10 @@ export const Signin= ()=> {
                         <form className="mt-4 mb-2">
                             <FormComponent label="Email Address" type="email" placeholder="johndoe@gmail.com" onchange={(e)=>{setSigninInfo({...signinInfo, email:e.target.value})}}/>
                             <FormComponent label="Password" type="password" placeholder="password" onchange={(e)=>{setSigninInfo({...signinInfo, password:e.target.value})}}/>
-                            <Button onclick={sendRequest} label="Sign In"/>
+                            <div className="mt-4">
+                                <Button onclick={sendRequest} label="Sign In"/>
+                            </div>
+
                         </form>
                         <div className="text-gray-500">
                             Don't have an account? <a className="text-gray-500 hover:text-gray-700 underline" href={'/signup'}>Sign Up</a>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
-interface blogParam
-    {
+interface blogParam{
         id: string,
         title: string,
         content: string,
@@ -11,7 +11,14 @@ interface blogParam
         }
     }
 
+interface userBlogParams {
+    id: string,
+    title: string,
+    content: string
+}
+
 export const useBlog = ({id}: {id: string}) => {
+    const navigate= useNavigate()
     const [loading, setLoading]= useState(true)
     const [blog, setBlog]= useState<blogParam>()
 
@@ -25,7 +32,11 @@ export const useBlog = ({id}: {id: string}) => {
             setBlog(res.data.blog)
             return setLoading(false)
         })
-    }, [id])
+        .catch((e)=>{
+            navigate('/home')
+            return alert(`${e.response.data.message}`)
+        })
+    }, [])
 
     return(
         {loading, blog}
@@ -34,6 +45,7 @@ export const useBlog = ({id}: {id: string}) => {
 }
 
 export const useBlogs = () => {
+    const navigate= useNavigate()
     const [loading, setLoading]= useState(true)
     const [blogs, setBlogs]= useState<blogParam[]>([])
 
@@ -47,9 +59,38 @@ export const useBlogs = () => {
             setBlogs(res.data.data)
             return setLoading(false)
         })
+        .catch((e)=>{
+            alert(e.response.data.message)
+            navigate('/signin')
+        })
     }, [])
 
     return(
         {loading, blogs}
     )
+}
+
+export const useUserBlogs = () => {
+    const navigate= useNavigate()
+    const [loading, setLoading]= useState(true)
+    const [userBlogs, setUserBlogs]= useState<userBlogParams[]>([])
+
+    useEffect(()=>{
+        axios.get("https://backend.devratdave02.workers.dev/api/v1/blog/user", {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(res=>{
+            setUserBlogs(res.data.blogs)
+            return setLoading(false)
+        })
+        .catch((e)=>{
+            alert(e.response.data.message)
+            navigate('/signin')
+        })
+    }, [])
+    return{
+        loading, userBlogs
+    }
 }
